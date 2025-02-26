@@ -8,4 +8,4 @@
 - **Adres e-mail:** "- "denys.lutsenko".collegiumwitelona.pl"
 
 - **Imię i nazwisko:** "Aleksander Crvn"
-- **Adres e-mail:** "aleksander.vrvn.collegiumwitelona.pl"
+- **Adres e-mail:** "aleksander.crvn.collegiumwitelona.pl"
