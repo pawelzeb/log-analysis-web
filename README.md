@@ -11,4 +11,4 @@
 - **Adres e-mail:** "michal.kalkan@collegiumwitelona.pl"
 - #
 - **Imię i nazwisko:** "Miron Kwiatkowski"
-- **Adres e-mail:** "miron.wiatkowski@collegiumwitelona.pl"
+- **Adres e-mail:** "miron.kwiatkowski@collegiumwitelona.pl"
