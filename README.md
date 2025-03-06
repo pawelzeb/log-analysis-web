@@ -8,7 +8,7 @@
 - **Adres e-mail:** "- "denys.lutsenk@collegiumwitelona.pl"
 #
 - **Imię i nazwisko:** "Michał Kalka"
-- **Adres e-mail:** "michal.kalkan@collegiumwitelona.pl"
+- **Adres e-mail:** "michal.kalka@collegiumwitelona.pl"
 - #
 - **Imię i nazwisko:** "Miron Kwiatkowski"
 - **Adres e-mail:** "miron.kwiatkowski@collegiumwitelona.pl"
