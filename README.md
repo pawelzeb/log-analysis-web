@@ -5,7 +5,7 @@
 - **Adres e-mail:** "pawel.zebrowski@studenci.collegiumwitelona.pl"
 #
 - **Imię i nazwisko:** "Denys Lutsenko"
-- **Adres e-mail:** "- "denys.lutsenk@collegiumwitelona.pl"
+- **Adres e-mail:** "- "denys.lutsenko@collegiumwitelona.pl"
 #
 - **Imię i nazwisko:** "Michał Kalka"
 - **Adres e-mail:** "michal.kalka@collegiumwitelona.pl"
