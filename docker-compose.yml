@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  vue-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5174:5173"   # Mapowanie: host 5174 -> kontener 5173
+    volumes:
+      - .:/app         # Montujemy bieżący katalog (log-analysis-web) do /app w kontenerze
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    restart: always
