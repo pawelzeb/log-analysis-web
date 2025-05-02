@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   vue-app:
     build:
@@ -10,5 +11,38 @@ services:
       - .:/app         # Montujemy bieżący katalog (log-analysis-web) do /app w kontenerze
       - /app/node_modules
     environment:
-      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_USEPOLLING=true  # Poprawka dla watchera w środowisku Docker + host
+    networks:
+      - app-network    # Sieć współdzielona z MySQL
     restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy  # Uruchomienie tylko po starcie i gotowości MySQL
+
+  mysql:
+    image: mysql:9.2
+    container_name: vue-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pawel   # Hasło roota
+      MYSQL_DATABASE: pawel        # Domyślna baza danych
+      MYSQL_USER: pawel            # Użytkownik MySQL
+      MYSQL_PASSWORD: pawel        # Hasło użytkownika
+    ports:
+      - "3306:3306"                # Umożliwia dostęp do MySQL z zewnątrz
+    volumes:
+      - mysql-data:/var/lib/mysql # Trwałość danych MySQL
+    networks:
+      - app-network
+    healthcheck:                  # Sprawdzenie, czy baza danych jest gotowa
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  mysql-data:   # Wolumen trwały dla MySQL
+
+networks:
+  app-network:  # Wspólna sieć dla vue-app i mysql
+    driver: bridge
