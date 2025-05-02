@@ -6,40 +6,54 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5174:5173"   # Mapowanie: host 5174 -> kontener 5173
+      - "5174:5173"
     volumes:
-      - .:/app         # Montujemy bieżący katalog (log-analysis-web) do /app w kontenerze
+      - .:/app
       - /app/node_modules
     environment:
-      - CHOKIDAR_USEPOLLING=true  # Poprawka dla watchera w środowisku Docker + host
+      - CHOKIDAR_USEPOLLING=true
     networks:
-      - app-network    # Sieć współdzielona z MySQL
+      - app-network
     restart: always
-    
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ../log-analysis-system-api/LogAnalysisApi
+      dockerfile: Dockerfile
+    ports:
+      - "5044:80"
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql:9.2
     container_name: vue-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: pawel   # Hasło roota
-      MYSQL_DATABASE: pawel        # Domyślna baza danych
-      MYSQL_USER: pawel            # Użytkownik MySQL
-      MYSQL_PASSWORD: pawel        # Hasło użytkownika
+      MYSQL_ROOT_PASSWORD: pawel
+      MYSQL_DATABASE: pawel
+      MYSQL_USER: pawel
+      MYSQL_PASSWORD: pawel
     ports:
-      - "3306:3306"                # Umożliwia dostęp do MySQL z zewnątrz
+      - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql # Trwałość danych MySQL
+      - mysql-data:/var/lib/mysql
     networks:
       - app-network
-    healthcheck:                  # Sprawdzenie, czy baza danych jest gotowa
+    healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
       start_period: 30s
 
 volumes:
-  mysql-data:   # Wolumen trwały dla MySQL
+  mysql-data:
 
 networks:
-  app-network:  # Wspólna sieć dla vue-app i mysql
+  app-network:
     driver: bridge
+
