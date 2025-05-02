@@ -15,10 +15,7 @@ services:
     networks:
       - app-network    # Sieć współdzielona z MySQL
     restart: always
-    depends_on:
-      mysql:
-        condition: service_healthy  # Uruchomienie tylko po starcie i gotowości MySQL
-
+    
   mysql:
     image: mysql:9.2
     container_name: vue-mysql
